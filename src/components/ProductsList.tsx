@@ -10,7 +10,7 @@ const ProductsList = () => {
   const products = useSelector(selectAllShopProducts);
 
   return (
-    <>
+    <section className="border p-3">
       <h2>Shops</h2>
       <Row>
         {products.map((product) => {
@@ -21,7 +21,7 @@ const ProductsList = () => {
           );
         })}
       </Row>
-    </>
+    </section>
   );
 };
 

@@ -16,7 +16,7 @@ const Shops = () => {
   };
 
   return (
-    <aside>
+    <aside className="border p-3">
       <h2>Shops</h2>
       <ListGroup>
         {shops.map((shop) => {
