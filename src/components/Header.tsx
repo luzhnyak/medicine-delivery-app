@@ -20,6 +20,9 @@ const Header = () => {
               <NavLink className="nav-link" to="/cart">
                 Shopping cart
               </NavLink>
+              <NavLink className="nav-link" to="/fav">
+                Favorites
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
         </Container>

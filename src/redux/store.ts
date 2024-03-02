@@ -12,18 +12,18 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { favoritesReducer } from "./favorites/slice";
+import { localReducer } from "./local/slice";
 import { shopsReducer } from "./shops/slice";
 import { productsReducer } from "./products/slice";
 
-const favoritesConfig = {
-  key: "favorites",
+const localConfig = {
+  key: "local",
   storage,
-  whitelist: ["items"],
+  whitelist: ["favItems", "cartItems"],
 };
 
 const rootReducer = combineReducers({
-  favorites: persistReducer(favoritesConfig, favoritesReducer),
+  local: persistReducer(localConfig, localReducer),
   shops: shopsReducer,
   products: productsReducer,
 });

@@ -21,7 +21,11 @@ const Shops = () => {
       <ListGroup>
         {shops.map((shop) => {
           return (
-            <ListGroup.Item action onClick={() => handleClick(shop.id)}>
+            <ListGroup.Item
+              key={shop.id}
+              action
+              onClick={() => handleClick(shop.id)}
+            >
               {shop.name}
             </ListGroup.Item>
           );

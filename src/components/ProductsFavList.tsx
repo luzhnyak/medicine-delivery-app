@@ -1,17 +1,17 @@
 import { useSelector } from "react-redux";
-import { selectAllShopProducts } from "../redux/products/selectors";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import ProductCard from "./ProductCard";
+import { selectAllFavProducts } from "../redux/local/selectors";
 
-const ProductsList = () => {
-  const products = useSelector(selectAllShopProducts);
+const ProductsFavList = () => {
+  const products = useSelector(selectAllFavProducts);
 
   return (
     <section className="border p-3">
-      <h2>Shops</h2>
+      <h2>Favorites</h2>
       <Row>
         {products.map((product) => {
           return (
@@ -25,4 +25,4 @@ const ProductsList = () => {
   );
 };
 
-export default ProductsList;
+export default ProductsFavList;
