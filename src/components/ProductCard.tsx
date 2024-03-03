@@ -3,9 +3,10 @@ import Card from "react-bootstrap/Card";
 import { IProduct } from "../types";
 import { FC } from "react";
 import { AppDispatch } from "../redux/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, addItemToFav } from "../redux/local/slice";
 import { FaHeart } from "react-icons/fa";
+import { selectcurrentShop } from "../redux/shops/selectors";
 
 interface IProps {
   product: IProduct;
@@ -13,9 +14,12 @@ interface IProps {
 
 const ProductCard: FC<IProps> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch();
+  const currentShop = useSelector(selectcurrentShop);
 
   const handleClick = () => {
-    dispatch(addItemToCart(product));
+    if (currentShop) {
+      dispatch(addItemToCart({ ...product, shop_id: currentShop.id }));
+    }
   };
 
   const handleFav = () => {

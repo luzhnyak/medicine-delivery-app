@@ -1,14 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IProduct } from "../../types";
+import { ICartProduct, IProduct } from "../../types";
 
 interface ILocalInitialState {
   favItems: IProduct[];
-  cartItems: IProduct[];
+  cartItems: ICartProduct[];
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
 }
 
 const localInitialState: ILocalInitialState = {
   favItems: [],
   cartItems: [],
+  name: "",
+  email: "",
+  phone: "",
+  address: "",
 };
 
 const localSlice = createSlice({
@@ -46,6 +54,18 @@ const localSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
+    setName(state: ILocalInitialState, action) {
+      state.name = action.payload;
+    },
+    setEmail(state: ILocalInitialState, action) {
+      state.email = action.payload;
+    },
+    setPhone(state: ILocalInitialState, action) {
+      state.phone = action.payload;
+    },
+    setAddress(state: ILocalInitialState, action) {
+      state.address = action.payload;
+    },
   },
 });
 
@@ -55,5 +75,9 @@ export const {
   updateItemInCart,
   addItemToCart,
   deleteItemFromCart,
+  setName,
+  setEmail,
+  setPhone,
+  setAddress,
 } = localSlice.actions;
 export const localReducer = localSlice.reducer;

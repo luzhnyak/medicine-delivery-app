@@ -24,25 +24,35 @@ const CartCard: FC<IProps> = ({ product }) => {
     <Card>
       <Row>
         <Col xs={4}>
-          <Card.Img style={{}} src={product.product.image} />
+          <Card.Img
+            style={{ height: "200px", objectFit: "contain" }}
+            src={product.product.image}
+          />
         </Col>
         <Col>
           <Card.Body className="ps-0">
             <Card.Title>{product.product.name}</Card.Title>
-            <Card.Text>
-              <b>Price: </b> {product.price} UAH
-            </Card.Text>
-            <Form.Group className="" controlId="formBasicQuantity">
-              <Form.Label>
-                <b>Quantity: </b>
-              </Form.Label>
-              <Form.Control
-                type="number"
-                min={0}
-                value={product.quantity}
-                onChange={(e) => handleChange(e.target.value)}
-              />
-            </Form.Group>
+            <Row>
+              <Col xs={3}>
+                <Card.Text>
+                  <b>Price: </b>
+                  <p className="h5"> {product.price} UAH</p>
+                </Card.Text>
+              </Col>
+              <Col>
+                <Form.Group className="" controlId="formBasicQuantity">
+                  <Form.Label>
+                    <b>Quantity: </b>
+                  </Form.Label>
+                  <Form.Control
+                    type="number"
+                    min={0}
+                    value={product.quantity}
+                    onChange={(e) => handleChange(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
           </Card.Body>
         </Col>
       </Row>

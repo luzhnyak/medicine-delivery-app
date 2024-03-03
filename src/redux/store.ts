@@ -15,6 +15,7 @@ import storage from "redux-persist/lib/storage";
 import { localReducer } from "./local/slice";
 import { shopsReducer } from "./shops/slice";
 import { productsReducer } from "./products/slice";
+import { ordersReducer } from "./orders/slice";
 
 const localConfig = {
   key: "local",
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   local: persistReducer(localConfig, localReducer),
   shops: shopsReducer,
   products: productsReducer,
+  orders: ordersReducer,
 });
 
 const ignoredPersistenceActions = [

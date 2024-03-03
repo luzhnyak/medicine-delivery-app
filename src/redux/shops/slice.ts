@@ -4,12 +4,14 @@ import { IShop } from "../../types";
 
 export interface IShopsInitialState {
   items: IShop[];
+  currentShop: IShop | null;
   isLoading: boolean;
   error: Error | any;
 }
 
 const shopsInitialState: IShopsInitialState = {
   items: [],
+  currentShop: null,
   isLoading: false,
   error: null,
 };
@@ -30,7 +32,11 @@ const handleRejected = (
 const shopsSlice = createSlice({
   name: "shops",
   initialState: shopsInitialState,
-  reducers: {},
+  reducers: {
+    setCurrentShop(state: IShopsInitialState, action) {
+      state.currentShop = action.payload;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getAllShopsThunk.fulfilled, (state, action) => {
@@ -44,4 +50,5 @@ const shopsSlice = createSlice({
       }),
 });
 
+export const { setCurrentShop } = shopsSlice.actions;
 export const shopsReducer = shopsSlice.reducer;
