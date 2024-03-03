@@ -1,7 +1,8 @@
 import axios from "axios";
 import { IOrder } from "../types";
 
-axios.defaults.baseURL = "http://127.0.0.1:5000/api";
+// axios.defaults.baseURL = "http://127.0.0.1:5000/api";
+axios.defaults.baseURL = "https://luzhnyak-aws.pp.ua:83/api";
 
 export const getAllShops = async () => {
   const { data } = await axios.get(`/shops`);
@@ -14,6 +15,6 @@ export const getAllShopProducts = async (shopId: number) => {
 };
 
 export const addOrder = async (order: IOrder) => {
-  const { data } = await axios.post(`/order`, order);
+  const { data } = await axios.post(`/orders`, order);
   return data;
 };

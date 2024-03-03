@@ -66,6 +66,13 @@ const localSlice = createSlice({
     setAddress(state: ILocalInitialState, action) {
       state.address = action.payload;
     },
+    clearCart(state: ILocalInitialState) {
+      state.cartItems = [];
+      state.name = "";
+      state.email = "";
+      state.phone = "";
+      state.address = "";
+    },
   },
 });
 
@@ -79,5 +86,6 @@ export const {
   setEmail,
   setPhone,
   setAddress,
+  clearCart,
 } = localSlice.actions;
 export const localReducer = localSlice.reducer;

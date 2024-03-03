@@ -1,9 +1,14 @@
+import { useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
+import { selectAllCartProducts } from "../redux/local/selectors";
+import { Badge } from "react-bootstrap";
 
 const Header = () => {
+  const products = useSelector(selectAllCartProducts);
+
   return (
     <header className="">
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -18,7 +23,10 @@ const Header = () => {
                 Shop
               </NavLink>
               <NavLink className="nav-link" to="/cart">
-                Shopping cart
+                Shopping cart{" "}
+                <Badge bg="primary">
+                  {products.length > 0 && products.length}
+                </Badge>
               </NavLink>
               <NavLink className="nav-link" to="/fav">
                 Favorites

@@ -1,29 +1,51 @@
+import { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { IProduct } from "../types";
-import { FC } from "react";
-import { AppDispatch } from "../redux/store";
-import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart, addItemToFav } from "../redux/local/slice";
 import { FaHeart } from "react-icons/fa";
+import { toast } from "react-toastify";
+
+import { IProduct } from "../types";
+import { AppDispatch } from "../redux/store";
+import {
+  addItemToCart,
+  addItemToFav,
+  deleteItemFromFav,
+} from "../redux/local/slice";
 import { selectcurrentShop } from "../redux/shops/selectors";
+import { selectAllFavProducts } from "../redux/local/selectors";
 
 interface IProps {
   product: IProduct;
 }
 
 const ProductCard: FC<IProps> = ({ product }) => {
+  const [isFav, setIsFav] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const currentShop = useSelector(selectcurrentShop);
+  const favProducts = useSelector(selectAllFavProducts);
+
+  useEffect(() => {
+    if (favProducts.find((item) => item.id === product.id)) {
+      setIsFav(true);
+    } else {
+      setIsFav(false);
+    }
+  }, [favProducts]);
 
   const handleClick = () => {
     if (currentShop) {
       dispatch(addItemToCart({ ...product, shop_id: currentShop.id }));
+      toast.success("Medicines will be added to the cart!");
     }
   };
 
   const handleFav = () => {
-    dispatch(addItemToFav(product));
+    if (isFav) {
+      dispatch(deleteItemFromFav(product.id));
+    } else {
+      dispatch(addItemToFav(product));
+    }
   };
 
   return (
@@ -46,7 +68,7 @@ const ProductCard: FC<IProps> = ({ product }) => {
           onClick={handleFav}
           title="add to Favorites"
         >
-          <FaHeart color="primary" />
+          <FaHeart className={isFav ? "text-danger" : "text-primary"} />
         </Button>
       </Card.Body>
     </Card>

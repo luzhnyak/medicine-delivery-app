@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { toast } from "react-toastify";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -12,15 +13,27 @@ import {
   selectPhone,
 } from "../redux/local/selectors";
 import CartCard from "./CartCard";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { useDispatch } from "react-redux";
-import { setAddress, setEmail, setName, setPhone } from "../redux/local/slice";
+import {
+  clearCart,
+  setAddress,
+  setEmail,
+  setName,
+  setPhone,
+} from "../redux/local/slice";
 import { addOrderThunk } from "../redux/orders/operations";
+import {
+  selectOrderError,
+  selectOrderIsLoading,
+} from "../redux/orders/selectors";
 
 const CartForm = () => {
   const dispatch: AppDispatch = useDispatch();
   const products = useSelector(selectAllCartProducts);
+  const isLoading = useSelector(selectOrderIsLoading);
+  const error = useSelector(selectOrderError);
   const name = useSelector(selectName);
   const email = useSelector(selectEmail);
   const phone = useSelector(selectPhone);
@@ -37,7 +50,14 @@ const CartForm = () => {
     setSum(refreshSum());
   }, [products]);
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    if (error) {
+      toast.error("Something happened, please reload the page!");
+    }
+  }, [error]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     const order = {
       name,
       email,
@@ -52,20 +72,25 @@ const CartForm = () => {
         };
       }),
     };
-    dispatch(addOrderThunk(order));
+    await dispatch(addOrderThunk(order)).unwrap();
+
+    dispatch(clearCart());
+    toast.success("Your order has been shipped!");
   };
 
   return (
     <section className="border p-3">
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={4}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Name"
-                onBlur={(e) => dispatch(setName(e.target.value))}
+                placeholder="Enter name"
+                onChange={(e) => dispatch(setName(e.target.value))}
+                value={name}
+                required
               />
             </Form.Group>
 
@@ -74,19 +99,20 @@ const CartForm = () => {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                onBlur={(e) => dispatch(setEmail(e.target.value))}
+                onChange={(e) => dispatch(setEmail(e.target.value))}
+                value={email}
+                required
               />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPhone">
               <Form.Label>Phone</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Phone"
-                onBlur={(e) => dispatch(setPhone(e.target.value))}
+                placeholder="Enter phone"
+                onChange={(e) => dispatch(setPhone(e.target.value))}
+                value={phone}
+                required
               />
             </Form.Group>
 
@@ -94,8 +120,10 @@ const CartForm = () => {
               <Form.Label>Address</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Address"
-                onBlur={(e) => dispatch(setAddress(e.target.value))}
+                placeholder="Enter address"
+                onChange={(e) => dispatch(setAddress(e.target.value))}
+                value={address}
+                required
               />
             </Form.Group>
           </Col>
@@ -119,8 +147,8 @@ const CartForm = () => {
             <Button
               className="d-block ms-auto"
               variant="primary"
-              type="button"
-              onClick={handleSubmit}
+              type="submit"
+              disabled={isLoading || products.length === 0}
             >
               Submit
             </Button>
