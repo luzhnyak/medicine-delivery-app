@@ -1,6 +1,8 @@
 import { ChangeEvent } from "react";
-import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
+
+import Form from "react-bootstrap/Form";
+
 import { AppDispatch } from "../redux/store";
 import { useSelector } from "react-redux";
 import { selectSort } from "../redux/local/selectors";

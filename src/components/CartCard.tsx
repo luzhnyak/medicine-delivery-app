@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { ICartProduct } from "../types";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FaTimes } from "react-icons/fa";
-
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useDispatch, useSelector } from "react-redux";
+
+import { ICartProduct } from "../types";
 import { AppDispatch } from "../redux/store";
 import { deleteItemFromCart, updateItemInCart } from "../redux/local/slice";
 import { selectAllShops } from "../redux/shops/selectors";

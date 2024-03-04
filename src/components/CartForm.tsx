@@ -1,10 +1,12 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { FormEvent, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useSelector } from "react-redux";
+
 import {
   selectAddress,
   selectAllCartProducts,
@@ -13,9 +15,8 @@ import {
   selectPhone,
 } from "../redux/local/selectors";
 import CartCard from "./CartCard";
-import { FormEvent, useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
-import { useDispatch } from "react-redux";
+
 import {
   clearCart,
   setAddress,

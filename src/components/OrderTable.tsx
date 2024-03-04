@@ -1,6 +1,8 @@
-import Table from "react-bootstrap/Table";
-import { IOrder } from "../types";
 import { FC } from "react";
+
+import Table from "react-bootstrap/Table";
+
+import { IOrder } from "../types";
 
 interface IProps {
   order: IOrder;

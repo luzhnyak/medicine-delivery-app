@@ -1,8 +1,8 @@
-# Medicine Shop
+# Medicine Delivery
 
 ## Description
 
-Medicine Shop is an online platform for purchasing medicines from various pharmacies. Users can browse through different pharmacies and their available medicines, add them to their cart, and place orders.
+Medicine Delivery is an online platform for purchasing medicines from various pharmacies. Users can browse through different pharmacies and their available medicines, add them to their cart, and place orders.
 
 [Frontend](https://github.com/luzhnyak/medicine-delivery-app)
 [Backend](https://github.com/luzhnyak/medicine-delivery-backend)
@@ -25,11 +25,13 @@ Medicine Shop is an online platform for purchasing medicines from various pharma
 - **Redux Toolkit**: State management library for managing the application's state.
 - **React Toastify**: For displaying toast notifications.
 - **Axios**: Promise-based HTTP client for making requests to the backend.
+- **Bootstrap**: CSS framework directed at responsive, mobile-first front-end web development.
 
 ### Backend
 
 - **Node.js**: Backend runtime environment for executing JavaScript code.
 - **Express.js**: Web application framework for building APIs.
+- **MariaDB**: Relational system of databases.
 - **Sequelize**: ORM for Node.js based on a deferred computation strategy (promise).
 - **Cors**: Middleware for enabling Cross-Origin Resource Sharing.
 - **dotenv**: For loading environment variables from a .env file.

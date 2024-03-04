@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectAllShops, selectcurrentShop } from "../redux/shops/selectors";
+import { useSelector, useDispatch } from "react-redux";
 
 import ListGroup from "react-bootstrap/ListGroup";
-import { useDispatch } from "react-redux";
+
+import { selectAllShops, selectcurrentShop } from "../redux/shops/selectors";
 import { AppDispatch } from "../redux/store";
 import { getAllShopProductsThunk } from "../redux/products/operations";
 import { IShop } from "../types";

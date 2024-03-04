@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { NavLink } from "react-router-dom";
-import { selectAllCartProducts } from "../redux/local/selectors";
 import { Badge } from "react-bootstrap";
+
+import { selectAllCartProducts } from "../redux/local/selectors";
 
 const Header = () => {
   const products = useSelector(selectAllCartProducts);

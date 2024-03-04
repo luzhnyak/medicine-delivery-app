@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { FaHeart } from "react-icons/fa";
-import { toast } from "react-toastify";
 
 import { IProduct } from "../types";
 import { AppDispatch } from "../redux/store";

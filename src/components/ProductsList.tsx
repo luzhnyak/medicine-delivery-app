@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
-import { selectAllShopProducts } from "../redux/products/selectors";
+import { useEffect, useState } from "react";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import ProductCard from "./ProductCard";
 import { selectcurrentShop } from "../redux/shops/selectors";
+import { selectAllShopProducts } from "../redux/products/selectors";
 import SelectSort from "./SelectSort";
 import { selectAllFavProducts, selectSort } from "../redux/local/selectors";
-import { useEffect, useState } from "react";
 import { IProduct } from "../types";
 
 const ProductsList = () => {
