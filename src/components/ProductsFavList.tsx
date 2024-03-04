@@ -1,8 +1,5 @@
 import { useSelector } from "react-redux";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 import ProductCard from "./ProductCard";
 import { selectAllFavProducts } from "../redux/local/selectors";
 
@@ -12,15 +9,11 @@ const ProductsFavList = () => {
   return (
     <section className="border p-3">
       <h2>Favorites</h2>
-      <Row>
+      <div className="d-flex flex-wrap gap-4">
         {products.map((product) => {
-          return (
-            <Col key={product.id}>
-              <ProductCard product={product} />
-            </Col>
-          );
+          return <ProductCard key={product.id} product={product} />;
         })}
-      </Row>
+      </div>
     </section>
   );
 };

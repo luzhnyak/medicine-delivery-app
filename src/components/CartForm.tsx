@@ -59,12 +59,15 @@ const CartForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const newProducts = products.filter((product) => product.quantity !== 0);
+
     const order = {
       name,
       email,
       phone,
       address,
-      orderProducts: products.map((product) => {
+      orderProducts: newProducts.map((product) => {
         return {
           shop_id: product.shop_id,
           product_id: product.product_id,

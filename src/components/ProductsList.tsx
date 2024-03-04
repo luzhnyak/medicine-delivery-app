@@ -1,9 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 import ProductCard from "./ProductCard";
 import { selectcurrentShop } from "../redux/shops/selectors";
 import { selectAllShopProducts } from "../redux/products/selectors";
@@ -44,15 +41,11 @@ const ProductsList = () => {
     <section className="border p-3">
       <h2>{currentShop && currentShop.name}</h2>
       <SelectSort />
-      <Row>
+      <div className="d-flex flex-wrap gap-3">
         {sortProducts.map((product) => {
-          return (
-            <Col key={product.id}>
-              <ProductCard product={product} />
-            </Col>
-          );
+          return <ProductCard key={product.id} product={product} />;
         })}
-      </Row>
+      </div>
     </section>
   );
 };

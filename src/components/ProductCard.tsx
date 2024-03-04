@@ -37,7 +37,7 @@ const ProductCard: FC<IProps> = ({ product }) => {
   const handleClick = () => {
     if (currentShop) {
       dispatch(addItemToCart({ ...product, shop_id: currentShop.id }));
-      toast.success("Medicines will be added to the cart!");
+      toast.success("Medicines have been added to the cart!");
     }
   };
 
@@ -50,19 +50,23 @@ const ProductCard: FC<IProps> = ({ product }) => {
   };
 
   return (
-    <Card style={{ width: "18rem" }} className="mb-3">
+    <Card style={{ width: "18rem" }} className="">
       <Card.Img
         style={{ aspectRatio: 16 / 9, objectFit: "cover" }}
         variant="top"
         src={product.product.image}
       />
-      <Card.Body>
+      <Card.Body className="d-flex flex-column">
         <Card.Title>{product.product.name}</Card.Title>
-        <Card.Text>{product.product.description.slice(0, 80)}</Card.Text>
-        <Button variant="primary" onClick={handleClick}>
-          add to Cart
-        </Button>
-        <b className="ms-4 fs-6">{product.price.toFixed(2)} UAH</b>
+        <Card.Text className="h-100">
+          {product.product.description.slice(0, 80)}
+        </Card.Text>
+        <div>
+          <Button className="" variant="primary" onClick={handleClick}>
+            add to Cart
+          </Button>
+          <b className="ms-4 fs-6">{product.price.toFixed(2)} UAH</b>
+        </div>
         <Button
           className="position-absolute"
           style={{ top: "0.1rem", right: "0.1rem" }}
