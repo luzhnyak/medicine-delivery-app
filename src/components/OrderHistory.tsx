@@ -8,6 +8,8 @@ import {
   selectOrderIsLoading,
 } from "../redux/orders/selectors";
 import { getOrdersThunk } from "../redux/orders/operations";
+import OrderTable from "./OrderTable";
+import { IOrder } from "../types";
 
 const OrderHistory = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +24,11 @@ const OrderHistory = () => {
     await dispatch(getOrdersThunk(email));
   };
 
+  const totalSum = (order: IOrder) => {
+    return order.orderProducts.reduce((prev, product) => {
+      return prev + product.quantity * product.price;
+    }, 0);
+  };
   return (
     <section className="border p-3">
       <h2>History</h2>
@@ -45,36 +52,21 @@ const OrderHistory = () => {
           Submit
         </Button>
       </Form>
-      <Row>
-        <Col>Name</Col>
-        <Col>Email</Col>
-        <Col>Phone</Col>
-        <Col>Address</Col>
-        <Col>Sum (UAH)</Col>
-      </Row>
+
       {orders.map((order) => {
         return (
           <>
             <hr />
             <hr />
-            <Row key={order.id}>
-              <Col>{order.name}</Col>
-              <Col>{order.email}</Col>
-              <Col>{order.phone}</Col>
-              <Col>{order.address}</Col>
-              <Col> {0}</Col>
-            </Row>
-            <hr />
-            {order.orderProducts.map((product) => {
-              return (
-                <Row>
-                  <Col xs={1}>{product.product_id}</Col>
-                  <Col>{product.name}</Col>
-                  <Col xs={1}>{product.quantity}</Col>
-                  <Col xs={1}>{product.price}</Col>
-                </Row>
-              );
-            })}
+
+            <p>
+              <b>Order №:</b>
+              {order.id}, <b>Customer:</b> {order.name}
+            </p>
+            <OrderTable order={order} />
+            <p>
+              <b>Total sum:</b> {totalSum(order).toFixed(2)} UAH
+            </p>
           </>
         );
       })}
