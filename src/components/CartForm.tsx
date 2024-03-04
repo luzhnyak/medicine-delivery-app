@@ -65,8 +65,8 @@ const CartForm = () => {
       address,
       orderProducts: products.map((product) => {
         return {
-          shop_id: product.id,
-          product_id: product.id,
+          shop_id: product.shop_id,
+          product_id: product.product_id,
           quantity: product.quantity,
           price: product.price,
         };

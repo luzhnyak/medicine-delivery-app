@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { addOrderThunk } from "./operations";
+import { addOrderThunk, getOrdersThunk } from "./operations";
 import { IOrder } from "../../types";
 
 export interface IOrdersInitialState {
@@ -36,12 +36,24 @@ const ordersSlice = createSlice({
       .addCase(addOrderThunk.fulfilled, (state, action) => {
         state.items.push(action.payload);
       })
-      .addMatcher(isAnyOf(addOrderThunk.pending), handlePending)
-      .addMatcher(isAnyOf(addOrderThunk.rejected), handleRejected)
-      .addMatcher(isAnyOf(addOrderThunk.fulfilled), (state) => {
-        state.isLoading = false;
-        state.error = null;
-      }),
+      .addCase(getOrdersThunk.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addMatcher(
+        isAnyOf(addOrderThunk.pending, getOrdersThunk.pending),
+        handlePending
+      )
+      .addMatcher(
+        isAnyOf(addOrderThunk.rejected, getOrdersThunk.rejected),
+        handleRejected
+      )
+      .addMatcher(
+        isAnyOf(addOrderThunk.fulfilled, getOrdersThunk.fulfilled),
+        (state) => {
+          state.isLoading = false;
+          state.error = null;
+        }
+      ),
 });
 
 export const ordersReducer = ordersSlice.reducer;

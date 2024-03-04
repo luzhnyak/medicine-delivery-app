@@ -8,6 +8,8 @@ export interface IProduct {
   id: number;
   price: number;
   quantity: number;
+  product_id: number;
+
   product: {
     name: string;
     description: string;
@@ -27,6 +29,7 @@ export interface IOrder {
   address: string;
   orderProducts: {
     shop_id: number;
+    name?: string;
     product_id: number;
     quantity: number;
     price: number;

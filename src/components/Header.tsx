@@ -31,6 +31,9 @@ const Header = () => {
               <NavLink className="nav-link" to="/fav">
                 Favorites
               </NavLink>
+              <NavLink className="nav-link" to="/history">
+                History
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
         </Container>
