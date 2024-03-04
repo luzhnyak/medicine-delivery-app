@@ -8,6 +8,7 @@ interface ILocalInitialState {
   email: string;
   phone: string;
   address: string;
+  sort: string;
 }
 
 const localInitialState: ILocalInitialState = {
@@ -17,6 +18,7 @@ const localInitialState: ILocalInitialState = {
   email: "",
   phone: "",
   address: "",
+  sort: "no_sorted",
 };
 
 const localSlice = createSlice({
@@ -66,6 +68,9 @@ const localSlice = createSlice({
     setAddress(state: ILocalInitialState, action) {
       state.address = action.payload;
     },
+    setSort(state: ILocalInitialState, action) {
+      state.sort = action.payload;
+    },
     clearCart(state: ILocalInitialState) {
       state.cartItems = [];
       state.name = "";
@@ -86,6 +91,7 @@ export const {
   setEmail,
   setPhone,
   setAddress,
+  setSort,
   clearCart,
 } = localSlice.actions;
 export const localReducer = localSlice.reducer;

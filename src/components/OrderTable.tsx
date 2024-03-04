@@ -21,12 +21,14 @@ const OrderTable: FC<IProps> = ({ order }) => {
       <tbody>
         {order.orderProducts.map((product) => {
           return (
-            <tr>
+            <tr key={product.id}>
               <td>{product.product_id}</td>
               <td>{product.name}</td>
-              <td>{product.quantity}</td>
-              <td>{product.price.toFixed(2)}</td>
-              <td>{(product.price * product.quantity).toFixed(2)}</td>
+              <td className="text-end">{product.quantity}</td>
+              <td className="text-end">{product.price.toFixed(2)}</td>
+              <td className="text-end">
+                {(product.price * product.quantity).toFixed(2)}
+              </td>
             </tr>
           );
         })}

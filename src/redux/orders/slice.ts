@@ -33,9 +33,6 @@ const ordersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(addOrderThunk.fulfilled, (state, action) => {
-        state.items.push(action.payload);
-      })
       .addCase(getOrdersThunk.fulfilled, (state, action) => {
         state.items = action.payload;
       })

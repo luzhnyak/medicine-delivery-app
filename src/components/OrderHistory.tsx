@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import { AppDispatch } from "../redux/store";
 import {
@@ -55,19 +55,25 @@ const OrderHistory = () => {
 
       {orders.map((order) => {
         return (
-          <>
+          <div key={order.id}>
             <hr />
             <hr />
+            <div className="d-flex gap-4 w-100">
+              <p>
+                <b>Order №: </b>
+                {order.id}, <b>Customer: </b> {order.name}{" "}
+              </p>
+              <p className="ms-auto">
+                <b>Created:</b>{" "}
+                {new Date(order.createdAt || "").toLocaleString()}
+              </p>
+            </div>
 
-            <p>
-              <b>Order №:</b>
-              {order.id}, <b>Customer:</b> {order.name}
-            </p>
             <OrderTable order={order} />
-            <p>
+            <p className="ms-auto">
               <b>Total sum:</b> {totalSum(order).toFixed(2)} UAH
             </p>
-          </>
+          </div>
         );
       })}
     </section>

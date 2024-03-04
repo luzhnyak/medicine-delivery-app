@@ -61,6 +61,7 @@ const ProductCard: FC<IProps> = ({ product }) => {
         <Button variant="primary" onClick={handleClick}>
           add to Cart
         </Button>
+        <b className="ms-4 fs-6">{product.price.toFixed(2)} UAH</b>
         <Button
           className="position-absolute"
           style={{ top: "0.1rem", right: "0.1rem" }}

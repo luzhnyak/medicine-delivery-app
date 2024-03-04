@@ -9,7 +9,8 @@ export interface IProduct {
   price: number;
   quantity: number;
   product_id: number;
-
+  createdAt: string;
+  fav: number;
   product: {
     name: string;
     description: string;
@@ -27,7 +28,9 @@ export interface IOrder {
   email: string;
   phone: string;
   address: string;
+  createdAt?: string;
   orderProducts: {
+    id?: number;
     shop_id: number;
     name?: string;
     product_id: number;
